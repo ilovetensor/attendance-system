@@ -5,6 +5,12 @@ app = Flask(__name__)
 @app.route('/')
 
 def helo():
-    return render_template('index.html')
+    result = '---'
+    try:
+        import face_recognition
+        result = 'success'
+    except:
+        result = 'failed'
+    return render_template('index.html', result=result)
 
 app.run(host='0.0.0.0')
