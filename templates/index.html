@@ -1,3 +1,19 @@
-<html>
-This is the basic page that wee have created now ... RESULT :  {{ result }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="options"></div>
+        <ul>
+            <li><a href="{{ url_for('upload_file') }}"> Add new Faces 📷</a></li>
+            <li><a href="{{ url_for('capture') }}"> Recognize + Attendance </a></li>
+            <li><a href="{{ url_for('show_data') }}"> View Attendence Dataset </a></li>
+            <li><a href="#"> Developers </a></li>
+        </ul>
+    </div>
+</body>
 </html>
