@@ -9,4 +9,4 @@ matplotlib==3.6.2
 pandas==1.2.0
 MarkupSafe
 itsdangerous
-opencv-python
+opencv-python-headless
