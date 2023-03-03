@@ -13,4 +13,3 @@ RUN pip install -r requirements.txt && \
 
 CMD python main.py
 
-!pip install opencv-python
