@@ -10,7 +10,8 @@ RUN pip install -r requirements.txt
 
 FROM animcogn/face_recognition:cpu
 COPY . /user/app/
-RUN pip3 install -r requirements.txt && \
+RUN cd /user/app/ && \
+    pip3 install -r requirements.txt && \
     python3 setup.py install
 
 
