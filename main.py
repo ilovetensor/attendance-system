@@ -4,12 +4,15 @@ import numpy as np
 from datetime import datetime, timedelta
 import os 
 import pandas as pd
+print(1)
 
 global gen_frame
 gen_frame = True 
 
 from flask import Flask, render_template, Response, request, redirect, flash, url_for
 from werkzeug.utils import secure_filename
+
+print(2)
 
 UPLOAD_FOLDER = 'ImagesAttendance'
 
@@ -18,7 +21,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
+print(3)
 
 
 # ======================= encoding ========================
@@ -35,9 +38,10 @@ for cl in myList:
     classNames.append(os.path.splitext(cl)[0])
 
 # print(classNames)
-
+print(4)
 
 def findEncodings(images):
+    print(5)
     encodeList = []
     for img in images:
 
@@ -47,6 +51,7 @@ def findEncodings(images):
     return encodeList
 
 def markAttendence(name):
+    print(6)
     with open('Data.csv', 'r+') as f:
         myDataList = f.readlines()
         nameList = []
@@ -85,7 +90,7 @@ def markAttendence(name):
                 f.writelines(f'\n{name}, {dtString}, {date}')
                 return 
 
-
+print(7)
           
 
 
@@ -96,8 +101,9 @@ print('Encoding Done')
 # =========================--------=========================
 
 
-
+print(8)
 def gen_frames():
+    print(9)
     camera = cv2.VideoCapture(0)
     while True and gen_frame:
         success, frame = camera.read()
@@ -132,35 +138,38 @@ def gen_frames():
 
             ret, buffer = cv2.imencode('.jpg', img)
             frame = buffer.tobytes()
-
+            print(10)
             yield(b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
             
-
+print(11)
 @app.route('/')
 def index():
     global gen_frame
     gen_frame = False
     return render_template('index.html')
-
+print(12)
 @app.route('/capture')
 def capture():
     global gen_frame
     gen_frame = False
     return render_template('capture.html')
 
-
+print(13)
 @app.route('/video_feed')
 def video_feed():
    global gen_frame
    gen_frame = True
    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+print(14)
 
 @app.route('/upload')
 def upload_file():
     global gen_frame
     gen_frame = False
     return render_template('upload.html')
+
+print(15)
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def pload_file():
@@ -181,6 +190,8 @@ def pload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return redirect('/')
 
+print(16)
+
 @app.route('/dataset')
 def show_data():
     global gen_frame
@@ -190,5 +201,8 @@ def show_data():
         
     return render_template('data.html', value=myDataList)
 
+print(17)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
+    print(18)
