@@ -3,6 +3,8 @@ COPY . /user/app/
 EXPOSE 5000
 WORKDIR /user/app/
 RUN pip install -r requirements.txt && \
+    apt update && apt install -y libsm6 libxext6 && \
+    apt-get install -y libxrender-dev && \
     pip install conda && \
     pip install cmake && \
     conda install -c conda-forge dlib && \
@@ -10,3 +12,5 @@ RUN pip install -r requirements.txt && \
     
 
 CMD python main.py
+
+!pip install opencv-python
