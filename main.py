@@ -172,7 +172,7 @@ def upload_file():
 print(15)
 
 @app.route('/uploader', methods = ['GET', 'POST'])
-def pload_file():
+def post_file():
     global gen_frame
     gen_frame = False
     def allowed_file(filename): return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -196,7 +196,7 @@ print(16)
 def show_data():
     global gen_frame
     gen_frame = False
-    with open('Data.csv', 'r+') as f:
+    with open('data.csv', 'r+') as f:
         myDataList = f.readlines()
         
     return render_template('data.html', value=myDataList)
